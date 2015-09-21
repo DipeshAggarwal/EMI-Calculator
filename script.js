@@ -5,12 +5,12 @@ function emiCalculate() {
     loanAmount = document.getElementById("amount").value;
     loanTerm   = document.getElementById("term").value;
     rateOfInt  = document.getElementById("rate").value;
-    emiAmount  = document.getElementById("emi").value;
+    emiAmount  = document.getElementById("emi");
     fragment   = document.createDocumentFragment();
     container  = document.getElementById("monthly");
     
     // Calculate the monthly EMI amount
-    emiAmount = Math.round((loanAmount * (rateOfInt / 1200)) / (1 - Math.pow((1 + (rateOfInt / 1200)), -loanTerm)));
+    emiAmount.value = Math.round((loanAmount * (rateOfInt / 1200)) / (1 - Math.pow((1 + (rateOfInt / 1200)), -loanTerm)));
     
     // Stores the total principle in a temp variable
     tempValue = loanAmount;
@@ -21,7 +21,7 @@ function emiCalculate() {
     while (tempValue > 0) {
         // Calculate interest and the new loanAmount
         interest   = tempValue * (rateOfInt / 1200);
-        tempValue  = tempValue - (emiAmount - interest);
+        tempValue  = tempValue - (emiAmount.value - interest);
         
         // Creating the required elements
         newWrapper  = document.createElement("tr");
@@ -30,9 +30,14 @@ function emiCalculate() {
         thirdChild  = document.createElement("td");
         
         // Populating the newly created table entires with the required values
-        firstChild.textContent  = Math.round(emiAmount);
+        firstChild.textContent  = Math.round(emiAmount.value);
         secondChild.textContent = Math.round(interest);
         thirdChild.textContent  = Math.round(tempValue);
+        
+        // Checking to see if our amount is in negative.
+        if (thirdChild.textContent < 0) {
+            thirdChild.textContent  = 0;
+        }
         
         // Append the three entires to newWrapper
         newWrapper.appendChild(firstChild);
