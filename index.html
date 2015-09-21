@@ -10,10 +10,24 @@
     
     <body>
         <form id = "form" onsubmit = "emiCalculate(); return false;">
-            Loan Amount: <input type = "number" id = "amount" size = 11 required autofocus /><p />
-            Loan Term (in months): <input type = "number" id = "term" size = 3 min = 0 max = 999 required /><p />
-            Rate of Interest per Annum: <input type = "number" id = "rate" min = 0 max = 100 required /><p />
-            EMI Amount: <input type = "number" id = "emi" disabled><p />
+            <div class = "table">
+                <div class="tr">
+                    <div class="td">Loan Amount:</div>
+                    <div class="td"><input type = "number" id = "amount" size = 11 required autofocus /></div>
+                </div>
+                <div class="tr">
+                    <div class="td">Loan Term (in months):</div>
+                    <div class="td"><input type = "number" id = "term" size = 3 min = 0 max = 999 required /></div>
+                </div>
+                <div class="tr">
+                    <div class="td">Rate of Interest per Annum:</div>
+                    <div class="td"><input type = "number" id = "rate" min = 0 max = 100 required /></div>
+                </div>
+                <div class="tr">
+                    <div class="td">EMI Amount:</div>
+                    <div class="td"><input type = "text" id = "emi" disabled></div>
+                </div>
+            </div>
             <input type="submit" value = "Submit" />
         </form>
         

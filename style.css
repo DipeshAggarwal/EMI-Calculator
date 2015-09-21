@@ -1,0 +1,12 @@
+div.table {
+    display: table;
+}
+
+div.tr {
+    display: table-row;
+}
+
+div.td {
+    display: table-cell;
+    padding : 5px;
+}
