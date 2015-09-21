@@ -1,3 +1,14 @@
+h1 {
+    color     : white;
+    text-align: center;
+    width     : 100%;
+}
+
+h1 span {
+    background: red;
+    margin    : 20px;
+}
+
 div.table {
     display: table;
 }
@@ -9,4 +20,20 @@ div.tr {
 div.td {
     display: table-cell;
     padding : 5px;
+}
+
+table {
+    border: 1px solid;
+    width : 50%;
+}
+
+tr:nth-child(even) {
+    background-color: #d3d3d3;
+    text-align      : center;
+}
+
+
+tr:nth-child(odd) {
+    background-color: white;
+    text-align      : center;
 }
