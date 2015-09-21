@@ -1,6 +1,6 @@
 function emiCalculate() {
     // Declaring variables
-    var loanAmount, loanTerm, rateOfInt, emiAmount, fragment, container, tempValue, interest, firstHeading, secondHeading, thirdHeading, newWrapper, firstChild, secondChild, thirdChild;
+    var loanAmount, loanTerm, rateOfInt, emiAmount, fragment, container, tempValue, interest, firstHeading, secondHeading, thirdHeading, fourthHeading, newWrapper, firstChild, secondChild, thirdChild, fourthChild;
     
     loanAmount = document.getElementById("amount").value;
     loanTerm   = document.getElementById("term").value;
@@ -22,16 +22,19 @@ function emiCalculate() {
     firstHeading  = document.createElement("th");
     secondHeading = document.createElement("th");
     thirdHeading  = document.createElement("th");
+    fourthHeading  = document.createElement("th");
     
     // Populating the headings
     firstHeading.textContent  = "Monthly Installment";
     secondHeading.textContent = "Interest";
-    thirdHeading.textContent  = "Balance";
+    thirdHeading.textContent  = "Principal";
+    fourthHeading.textContent = "Balance";
     
     // Appending the headings to the fragment
     fragment.appendChild(firstHeading);
     fragment.appendChild(secondHeading);
     fragment.appendChild(thirdHeading);
+    fragment.appendChild(fourthHeading);
     
     while (tempValue > 0) {
         // Calculate interest and the new loanAmount
@@ -43,21 +46,24 @@ function emiCalculate() {
         firstChild  = document.createElement("td");
         secondChild = document.createElement("td");
         thirdChild  = document.createElement("td");
+        fourthChild = document.createElement("td");
         
         // Populating the newly created table entires with the required values
         firstChild.textContent  = Math.round(emiAmount.value);
         secondChild.textContent = Math.round(interest);
-        thirdChild.textContent  = Math.round(tempValue);
+        thirdChild.textContent  = Math.round(emiAmount.value - interest);
+        fourthChild.textContent = Math.round(tempValue);
         
         // Checking to see if our amount is in negative.
-        if (thirdChild.textContent < 0) {
-            thirdChild.textContent  = 0;
+        if (fourthChild.textContent < 0) {
+            fourthChild.textContent  = 0;
         }
         
         // Append the three entires to newWrapper
         newWrapper.appendChild(firstChild);
         newWrapper.appendChild(secondChild);
         newWrapper.appendChild(thirdChild);
+        newWrapper.appendChild(fourthChild);
         
         // Append the newWrapper to the Document Fragment
         fragment.appendChild(newWrapper);
