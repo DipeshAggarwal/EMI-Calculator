@@ -1,6 +1,6 @@
 function emiCalculate() {
     // Declaring variables
-    var loanAmount, loanTerm, rateOfInt, emiAmount, fragment, container, tempValue, interest, firstHeading, secondHeading, thirdHeading, fourthHeading, newWrapper, firstChild, secondChild, thirdChild, fourthChild;
+    var loanAmount, loanTerm, rateOfInt, emiAmount, fragment, container, tempValue, interest, firstHeading, secondHeading, thirdHeading, fourthHeading, newWrapper, firstChild, secondChild, thirdChild, fourthChild, check;
     
     loanAmount = document.getElementById("amount").value;
     loanTerm   = document.getElementById("term").value;
@@ -8,6 +8,7 @@ function emiCalculate() {
     emiAmount  = document.getElementById("emi");
     fragment   = document.createDocumentFragment();
     container  = document.getElementById("monthly");
+    check      = false;
     
     // Calculate the monthly EMI amount
     emiAmount.value = Math.round((loanAmount * (rateOfInt / 1200)) / (1 - Math.pow((1 + (rateOfInt / 1200)), -loanTerm)));
@@ -22,7 +23,7 @@ function emiCalculate() {
     firstHeading  = document.createElement("th");
     secondHeading = document.createElement("th");
     thirdHeading  = document.createElement("th");
-    fourthHeading  = document.createElement("th");
+    fourthHeading = document.createElement("th");
     
     // Populating the headings
     firstHeading.textContent  = "Monthly Installment";
@@ -37,10 +38,6 @@ function emiCalculate() {
     fragment.appendChild(fourthHeading);
     
     while (tempValue > 0) {
-        // Calculate interest and the new loanAmount
-        interest   = tempValue * (rateOfInt / 1200);
-        tempValue  = tempValue - (emiAmount.value - interest);
-        
         // Creating the required elements
         newWrapper  = document.createElement("tr");
         firstChild  = document.createElement("td");
@@ -48,10 +45,25 @@ function emiCalculate() {
         thirdChild  = document.createElement("td");
         fourthChild = document.createElement("td");
         
+        // Check to see if the Balance is less than Monthly payment
+        if ((emiAmount.value - tempValue) > 0) {
+            check = true;
+            console.log(emiAmount.value, tempValue);
+            firstChild.textContent  = Math.round(tempValue);
+            thirdChild.textContent  = Math.round(tempValue);
+        }
+        
+        // Calculate interest and the new loanAmount
+        interest   = tempValue * (rateOfInt / 1200);
+        tempValue  = tempValue - (emiAmount.value - interest);
+        
         // Populating the newly created table entires with the required values
-        firstChild.textContent  = Math.round(emiAmount.value);
+        // Check to ensure that we aren't on the last entry
+        if (check === false) {
+            firstChild.textContent  = Math.round(emiAmount.value);
+            thirdChild.textContent  = Math.round(emiAmount.value - interest);
+        }
         secondChild.textContent = Math.round(interest);
-        thirdChild.textContent  = Math.round(emiAmount.value - interest);
         fourthChild.textContent = Math.round(tempValue);
         
         // Checking to see if our amount is in negative.
