@@ -10,6 +10,7 @@ h1 span {
 }
 
 div.table {
+    margin : auto;
     display: table;
 }
 
@@ -19,13 +20,15 @@ div.tr {
 
 div.td {
     display: table-cell;
-    padding : 5px;
+    padding: 5px;
 }
 
 table {
-    margin-top: 100px;
-    border    : 1px solid;
-    width     : 50%;
+    margin-left : auto;
+    margin-right: auto;
+    margin-top  : 50px;
+    border      : 1px solid;
+    width       : 50%;
 }
 
 tr:nth-child(odd) {

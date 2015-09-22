@@ -1,6 +1,6 @@
 function emiCalculate() {
     // Declaring variables
-    var loanAmount, loanTerm, rateOfInt, emiAmount, fragment, container, tempValue, interest, firstHeading, secondHeading, thirdHeading, fourthHeading, newWrapper, firstChild, secondChild, thirdChild, fourthChild, check;
+    var loanAmount, loanTerm, rateOfInt, emiAmount, fragment, container, tempValue, interest, firstHeading, secondHeading, thirdHeading, fourthHeading, newWrapper, firstChild, secondChild, thirdChild, fourthChild, check, totalInterest;
     
     loanAmount = document.getElementById("amount").value;
     loanTerm   = document.getElementById("term").value;
@@ -14,7 +14,8 @@ function emiCalculate() {
     emiAmount.value = ((loanAmount * (rateOfInt / 1200)) / (1 - Math.pow((1 + (rateOfInt / 1200)), -loanTerm))).toFixed(2);
     
     // Stores the total principle in a temp variable
-    tempValue = loanAmount;
+    tempValue     = loanAmount;
+    totalInterest = 0;
     
     // We empty our container before processing next request.
     container.innerHTML = "";
@@ -52,8 +53,9 @@ function emiCalculate() {
         }
         
         // Calculate interest and the new loanAmount
-        interest   = tempValue * (rateOfInt / 1200);
-        tempValue  = tempValue - (emiAmount.value - interest);
+        interest       = tempValue * (rateOfInt / 1200);
+        tempValue      = tempValue - (emiAmount.value - interest);
+        totalInterest += interest;
         
         // Populating the newly created table entires with the required values
         // Check to ensure that we aren't on the last entry
@@ -79,5 +81,8 @@ function emiCalculate() {
         fragment.appendChild(newWrapper);
     }
     // Insert the document fragment into the table
+    document.getElementById("principalAmount").value = loanAmount;
+    document.getElementById("interestAmount").value  = totalInterest.toFixed(2);
+    document.getElementById("totalAmount").value     = (Number(loanAmount) + totalInterest).toFixed(2);
     container.appendChild(fragment);
 }

@@ -12,24 +12,30 @@
         <h1><span>EMI Calculator</span></h1>
         <form id = "form" onsubmit = "emiCalculate(); return false;">
             <div class = "table">
-                <div class="tr">
-                    <div class="td">Loan Amount:</div>
-                    <div class="td"><input type = "number" id = "amount" size = 11 min = 0 required autofocus /></div>
+                <div class = "tr">
+                    <div class = "td">Loan Amount:</div>
+                    <div class = "td"><input type = "number" id = "amount" size = 11 min = 0 required autofocus /></div>
+                    <div class = "td">Principal amount repaid</div>
+                    <div class = "td"><input type = "text" id = "principalAmount" disabled></div>
                 </div>
-                <div class="tr">
-                    <div class="td">Loan Term (in months):</div>
-                    <div class="td"><input type = "number" id = "term" size = 3 min = 0 max = 999 required /></div>
+                <div class = "tr">
+                    <div class = "td">Loan Term (in months):</div>
+                    <div class = "td"><input type = "number" id = "term" size = 3 min = 0 max = 999 required /></div>
+                    <div class = "td">Interest amount paid</div>
+                    <div class = "td"><input type = "text" id = "interestAmount" disabled></div>
                 </div>
-                <div class="tr">
-                    <div class="td">Rate of Interest per Annum:</div>
-                    <div class="td"><input type = "number" id = "rate" min = 0 max = 100 required /></div>
+                <div class = "tr">
+                    <div class = "td">Rate of Interest per Annum:</div>
+                    <div class = "td"><input type = "number" id = "rate" min = 0 max = 100 required /></div>
+                    <div class = "td">Total amount paid back </div>
+                    <div class = "td"><input type = "text" id = "totalAmount" disabled></div>
                 </div>
-                <div class="tr">
-                    <div class="td">EMI Amount:</div>
-                    <div class="td"><input type = "text" id = "emi" disabled></div>
+                <div class = "tr">
+                    <div class = "td">EMI Amount:</div>
+                    <div class = "td"><input type = "text" id = "emi" disabled></div>
                 </div>
             </div>
-            <input type="submit" value = "Calculate EMI" />
+            <div style = "text-align:center; margin-top:20px"><input type="submit" value = "Calculate EMI" /></div>
         </form>
         
         <table id = "monthly" class = "emiTable"></table>
