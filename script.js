@@ -11,7 +11,7 @@ function emiCalculate() {
     check      = false;
     
     // Calculate the monthly EMI amount
-    emiAmount.value = Math.round((loanAmount * (rateOfInt / 1200)) / (1 - Math.pow((1 + (rateOfInt / 1200)), -loanTerm)));
+    emiAmount.value = ((loanAmount * (rateOfInt / 1200)) / (1 - Math.pow((1 + (rateOfInt / 1200)), -loanTerm))).toFixed(2);
     
     // Stores the total principle in a temp variable
     tempValue = loanAmount;
@@ -48,9 +48,7 @@ function emiCalculate() {
         // Check to see if the Balance is less than Monthly payment
         if ((emiAmount.value - tempValue) > 0) {
             check = true;
-            console.log(emiAmount.value, tempValue);
-            firstChild.textContent  = Math.round(tempValue);
-            thirdChild.textContent  = Math.round(tempValue);
+            firstChild.textContent  = (tempValue).toFixed(2);
         }
         
         // Calculate interest and the new loanAmount
@@ -60,11 +58,11 @@ function emiCalculate() {
         // Populating the newly created table entires with the required values
         // Check to ensure that we aren't on the last entry
         if (check === false) {
-            firstChild.textContent  = Math.round(emiAmount.value);
-            thirdChild.textContent  = Math.round(emiAmount.value - interest);
+            firstChild.textContent  = Number(emiAmount.value).toFixed(2);
         }
-        secondChild.textContent = Math.round(interest);
-        fourthChild.textContent = Math.round(tempValue);
+        secondChild.textContent = (interest).toFixed(2);
+        thirdChild.textContent  = (firstChild.textContent - interest).toFixed(2);
+        fourthChild.textContent = (tempValue).toFixed(2);
         
         // Checking to see if our amount is in negative.
         if (fourthChild.textContent < 0) {
