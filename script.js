@@ -1,6 +1,6 @@
 function emiCalculate() {
     // Declaring variables
-    var loanAmount, loanTerm, rateOfInt, emiAmount, fragment, container, tempValue, interest, firstHeading, secondHeading, thirdHeading, fourthHeading, newWrapper, firstChild, secondChild, thirdChild, fourthChild, check, totalInterest;
+    var loanAmount, loanTerm, rateOfInt, emiAmount, fragment, container, tempValue, interest, firstHeading, secondHeading, thirdHeading, fourthHeading, newWrapper, firstChild, secondChild, thirdChild, fourthChild, totalInterest;
     
     loanAmount = document.getElementById("amount").value;
     loanTerm   = document.getElementById("term").value;
@@ -8,7 +8,6 @@ function emiCalculate() {
     emiAmount  = document.getElementById("emi");
     fragment   = document.createDocumentFragment();
     container  = document.getElementById("monthly");
-    check      = false;
     
     // Calculate the monthly EMI amount
     emiAmount.value = ((loanAmount * (rateOfInt / 1200)) / (1 - Math.pow((1 + (rateOfInt / 1200)), -loanTerm))).toFixed(2);
@@ -46,12 +45,6 @@ function emiCalculate() {
         thirdChild  = document.createElement("td");
         fourthChild = document.createElement("td");
         
-        // Check to see if the Balance is less than Monthly payment
-        if ((emiAmount.value - tempValue) > 0) {
-            check = true;
-            firstChild.textContent  = (tempValue).toFixed(2);
-        }
-        
         // Calculate interest and the new loanAmount
         interest       = tempValue * (rateOfInt / 1200);
         tempValue      = tempValue - (emiAmount.value - interest);
@@ -59,15 +52,13 @@ function emiCalculate() {
         
         // Populating the newly created table entires with the required values
         // Check to ensure that we aren't on the last entry
-        if (check === false) {
-            firstChild.textContent  = Number(emiAmount.value).toFixed(2);
-        }
+        firstChild.textContent  = Number(emiAmount.value).toFixed(2);
         secondChild.textContent = (interest).toFixed(2);
         thirdChild.textContent  = (firstChild.textContent - interest).toFixed(2);
         fourthChild.textContent = (tempValue).toFixed(2);
         
         // Checking to see if our amount is in negative.
-        if (fourthChild.textContent < 0) {
+        if (fourthChild.textContent < 1) {
             fourthChild.textContent  = 0;
         }
         
