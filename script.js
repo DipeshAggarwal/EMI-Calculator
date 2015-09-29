@@ -1,4 +1,5 @@
 function emiCalculate() {
+    "use strict";
     // Declaring variables
     var loanAmount, loanTerm, rateOfInt, emiAmount, fragment, container, tempValue, interest, firstHeading, secondHeading, thirdHeading, fourthHeading, newWrapper, firstChild, secondChild, thirdChild, fourthChild, totalInterest;
     
@@ -60,6 +61,7 @@ function emiCalculate() {
         // Checking to see if our amount is in negative.
         if (fourthChild.textContent < 1) {
             fourthChild.textContent  = 0;
+            tempValue                = 0;
         }
         
         // Append the three entires to newWrapper
