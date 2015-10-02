@@ -1,11 +1,9 @@
 h1 {
-    color     : white;
     text-align: center;
     width     : 100%;
 }
 
 h1 span {
-    background: red;
     margin    : 20px;
 }
 

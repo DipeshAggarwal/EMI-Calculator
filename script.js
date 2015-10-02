@@ -1,7 +1,7 @@
 function emiCalculate() {
     "use strict";
     // Declaring variables
-    var loanAmount, loanTerm, rateOfInt, emiAmount, fragment, container, tempValue, interest, firstHeading, secondHeading, thirdHeading, fourthHeading, newWrapper, firstChild, secondChild, thirdChild, fourthChild, totalInterest;
+    var loanAmount, loanTerm, rateOfInt, emiAmount, emiContainer, fragment, container, tempValue, interest, firstHeading, secondHeading, thirdHeading, fourthHeading, newWrapper, firstChild, secondChild, thirdChild, fourthChild, totalInterest;
     
     loanAmount = document.getElementById("amount").value;
     loanTerm   = document.getElementById("term").value;
@@ -11,7 +11,8 @@ function emiCalculate() {
     container  = document.getElementById("monthly");
     
     // Calculate the monthly EMI amount
-    emiAmount.value = ((loanAmount * (rateOfInt / 1200)) / (1 - Math.pow((1 + (rateOfInt / 1200)), -loanTerm))).toFixed(2);
+    emiContainer    = ((loanAmount * (rateOfInt / 1200)) / (1 - Math.pow((1 + (rateOfInt / 1200)), -loanTerm)));
+    emiAmount.value = emiContainer.toFixed(0);
     
     // Stores the total principle in a temp variable
     tempValue     = loanAmount;
@@ -48,15 +49,15 @@ function emiCalculate() {
         
         // Calculate interest and the new loanAmount
         interest       = tempValue * (rateOfInt / 1200);
-        tempValue      = tempValue - (emiAmount.value - interest);
+        tempValue      = tempValue - (emiContainer - interest);
         totalInterest += interest;
         
         // Populating the newly created table entires with the required values
         // Check to ensure that we aren't on the last entry
-        firstChild.textContent  = Number(emiAmount.value).toFixed(2);
-        secondChild.textContent = (interest).toFixed(2);
-        thirdChild.textContent  = (firstChild.textContent - interest).toFixed(2);
-        fourthChild.textContent = (tempValue).toFixed(2);
+        firstChild.textContent  = Number(emiContainer).toFixed(0);
+        secondChild.textContent = (interest).toFixed(0);
+        thirdChild.textContent  = (firstChild.textContent - interest).toFixed(0);
+        fourthChild.textContent = (tempValue).toFixed(0);
         
         // Checking to see if our amount is in negative.
         if (fourthChild.textContent < 1) {
@@ -75,7 +76,7 @@ function emiCalculate() {
     }
     // Insert the document fragment into the table
     document.getElementById("principalAmount").value = loanAmount;
-    document.getElementById("interestAmount").value  = totalInterest.toFixed(2);
-    document.getElementById("totalAmount").value     = (Number(loanAmount) + totalInterest).toFixed(2);
+    document.getElementById("interestAmount").value  = totalInterest.toFixed(0);
+    document.getElementById("totalAmount").value     = (Number(loanAmount) + totalInterest).toFixed(0);
     container.appendChild(fragment);
 }
